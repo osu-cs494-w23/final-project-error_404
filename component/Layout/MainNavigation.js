@@ -1,20 +1,31 @@
-import Link from "next/link"
-import classes from "./MainNavigation.module.css"
+import Link from "next/link";
+import Nav from "react-bootstrap/Nav";
+import Navbar from 'react-bootstrap/Navbar';
+import Container from "react-bootstrap/Container";
 
 const HomePage = () => {
-    return (
-        <div className={classes.menu}>
-            <div className = {classes.menu_item_list}>
-                <Link className = {classes.menu_item_1} href="/">Home</Link>
-                <Link className = {classes.menu_item_2} href="/">Item 1</Link>
-                <Link className = {classes.menu_item_3} href="/">Item 2</Link>
-                <Link className = {classes.menu_item} href="/">Item 3</Link>
-                <Link className = {classes.menu_item} href="/about">About Us</Link>
-            </div>
+  return (
+    <Navbar bg="dark" variant="dark">
+       <Container>
+          <Navbar.Brand as={Link} href="/">
+            Valorant Tracker
+          </Navbar.Brand>
 
-            <div className={classes.background_Menu}></div>
-        </div>
-    )
-}
+          <Nav className="me-auto">
+            <Nav.Link  as={Link} href="/">Home</Nav.Link>
+            <Nav.Link  as={Link} href="/leaderboard">Leaderboard</Nav.Link>
+            <Nav.Link  as={Link} href="/agents">Agents</Nav.Link>
+            <Nav.Link  as={Link} href="/weapons">Weapons</Nav.Link>
+            <Nav.Link  as={Link} href="/about"> Who Are We </Nav.Link>
+          </Nav>
+          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>
+            Signed in as: <a href="/login">Mark Otto</a>
+          </Navbar.Text>
+        </Navbar.Collapse>
+        </Container>
+    </Navbar>
+  );
+};
 
-export default HomePage
+export default HomePage;
