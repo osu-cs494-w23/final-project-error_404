@@ -1,8 +1,7 @@
+import HomePage from "../../component/Layout/MainNavigation"
+
 const MainPage = () => {
+  return <HomePage />;
+};
 
-  return(<>
-    Hello Page
-  </>)
-}
-
-export default MainPage
+export default MainPage;
