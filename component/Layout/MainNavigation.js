@@ -5,8 +5,10 @@ import Container from "react-bootstrap/Container";
 
 const HomePage = () => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" expand="lg" variant="dark">
        <Container>
+       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+       <Navbar.Collapse>
           <Navbar.Brand as={Link} href="/">
             Valorant Tracker
           </Navbar.Brand>
@@ -18,7 +20,6 @@ const HomePage = () => {
             <Nav.Link  as={Link} href="/weapons">Weapons</Nav.Link>
             <Nav.Link  as={Link} href="/about"> Who Are We </Nav.Link>
           </Nav>
-          <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             Signed in as: <a href="/login">Mark Otto</a>
           </Navbar.Text>
