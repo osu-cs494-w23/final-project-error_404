@@ -1,0 +1,11 @@
+.charIcon{
+    width: 100px;
+    height: 100px;
+}
+.charPic{
+    max-height: 400px;
+}
+.slotIcon{
+    max-width: 50px;
+    background-color: black;
+}
