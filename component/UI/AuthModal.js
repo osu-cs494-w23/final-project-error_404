@@ -5,21 +5,19 @@ import { Fragment, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { modalAction } from "@/store/modal";
 import classes from "./AuthModal.module.css";
+import { signIn } from "next-auth/react"
+
 
 async function createUser(username, email, password) {
-
-
   const res = await fetch("api/auth/signup", {
     method: "POST",
-    body: JSON.stringify({username, email, password }),
+    body: JSON.stringify({ username, email, password }),
     headers: {
       "Content-Type": "application/json",
     },
   });
 
   const data = await res.json();
-
-  console.log(data);
 
   if (!res.ok) {
     throw new Error(data.message || "Something went wrong!");
@@ -30,6 +28,7 @@ const AuthModal = () => {
   const dispatch = useDispatch();
   const isShow = useSelector((state) => state.modal.isShow);
   const [isSignIn, setSignIn] = useState(true);
+  const [isExisting, setExisting] = useState(false);
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -44,24 +43,48 @@ const AuthModal = () => {
   };
 
   const SignupHandler = async (e) => {
-
     console.log("Click");
 
     e.preventDefault();
 
+    setExisting(false);
+    
     const enteredUsername = usernameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
     try {
-      await createUser(enteredUsername,enteredEmail, enteredPassword);
-      
+      await createUser(enteredUsername, enteredEmail, enteredPassword);
     } catch (e) {
       console.log(e);
+      
+      if(e.message === "User already exists")
+      {
+        setExisting(true);
+        return
+      }
     }
+  
+    setSignIn(true);
+
+
+  
   };
 
-  const SigninHandler = async (e) => {};
+  const SigninHandler = async (e) => {
+    e.preventDefault()
+    
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
+
+    const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword });
+
+
+    console.log(result)
+    
+    console.log("Clicked Sign In")
+
+  };
 
   return (
     <Fragment>
@@ -92,7 +115,8 @@ const AuthModal = () => {
                 required
               />
               <Form.Text className="text-muted">
-                Use valid email address
+                {isExisting && !isSignIn && "User already exists"}
+                {!isExisting &&"Use valid email address"}
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -103,6 +127,10 @@ const AuthModal = () => {
                 ref={passwordInputRef}
                 required
               />
+
+              <Form.Text className="text-muted">
+                Password must be at least 7 characters
+              </Form.Text>
             </Form.Group>
 
             <div className="d-flex justify-content-between">
