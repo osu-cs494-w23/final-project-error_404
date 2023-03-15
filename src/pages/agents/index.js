@@ -1,4 +1,4 @@
-import AgentPage from "../../component/AgentPage"
+import AgentPage from "../../../component/AgentPage"
 
 const Agent = () => {
   return <AgentPage />;

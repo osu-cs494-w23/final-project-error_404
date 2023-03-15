@@ -13,7 +13,7 @@ function useAgentsList(){
             let responseBody = {}
             try {
                 const response = await fetch(
-                    `https://valorant-api.com/v1/agents`,
+                    `https://valorant-api.com/v1/agents?isPlayableCharacter=true`,
                     {signal: controller.signal}  
                 )
                 // console.log(response.status)

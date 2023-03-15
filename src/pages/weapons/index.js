@@ -1,4 +1,4 @@
-import WeaponPage from "../../component/WeaponPage"
+import WeaponPage from "../../../component/WeaponPage"
 
 const Weapon = () => {
   return <WeaponPage />;

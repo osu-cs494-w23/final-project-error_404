@@ -10,12 +10,15 @@ const WelcomePage = () => {
     <Container>
       <div className={classes.center}>
         <div>
-          <h1>
-            <ReactRotatingText items={["Valorant", "Tracker"]} />
+          <h1 className={classes.title}>
+            Valorant  
+          </h1>
+          <h1 className={classes.subtitle}>
+          <ReactRotatingText items={["Tracker"]} />
           </h1>
         </div>
         <div>
-          <h1>Search Bar</h1>
+          <input></input>
         </div>
       </div>
     </Container>

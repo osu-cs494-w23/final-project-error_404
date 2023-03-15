@@ -11,4 +11,14 @@
 .center div{
     width: 50%;
     color: white;
+    
+}
+
+
+.title{
+    font-size: 130px;
+}
+
+.subtitle{
+    font-size: 90px;
 }
