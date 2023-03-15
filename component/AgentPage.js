@@ -63,7 +63,7 @@ const AgentPage = () => {
                                         <img className={classes.charIcon} src={char.displayIcon} alt={char.displayName+"_icon"}></img>
                                         <div className={classes.bioDetail}>
                                             <div className={classes.title}>
-                                                <h1>{char.displayName}</h1>
+                                                <h1 className={classes.titleText}>{char.displayName}</h1>
                                                 <img className={classes.roleIconTitle} src={char.role.displayIcon} alt={char.displayName+"_role_icon_title"}></img>
                                             </div>
                                             <h4>{char.role.displayName}</h4>

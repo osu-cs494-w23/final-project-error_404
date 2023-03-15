@@ -123,6 +123,10 @@
     flex-direction: row;
 }
 
+.titleText{
+    font-family: 'Tungsten-Bold', sans-serif;
+}
+
 .roleIconTitle{
     max-width: 45px;
     max-height: 45px;
@@ -174,21 +178,29 @@
 .abilityBox{
     margin: 4px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     border: 2px solid rgb(255, 255, 255);
     border-radius: 10%;
+    font-family: 'Tungsten-Bold', sans-serif;
 }
 
 .abilityBoxS{
     margin: 4px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     border: 2px solid rgba(251,109,95);
     border-radius: 10%;
     color: rgba(251,109,95);
+    font-family: 'Tungsten-Bold', sans-serif;
 }
 
 .abilityBox:hover{
     margin: 4px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     border: 2px solid rgba(251,109,95);
     border-radius: 10%;
     color: rgba(251,109,95);
