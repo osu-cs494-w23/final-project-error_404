@@ -1,0 +1,14 @@
+.center{
+    display: flex ;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 25%;
+
+}
+
+.center div{
+    width: 50%;
+    color: white;
+}

@@ -1,16 +1,18 @@
-import MainNavigation from './MainNavigation';
-import Container from 'react-bootstrap/Container';
-import AuthModal from '../UI/AuthModal';
+import MainNavigation from "./MainNavigation";
+import Container from "react-bootstrap/Container";
+import AuthModal from "../UI/AuthModal";
+import classes from "../Layout/Layout.module.css";
+import { Fragment } from "react";
 
 function Layout(props) {
   return (
-    <div>
+    <div className={classes.container_div}>
       <MainNavigation />
-      <Container>{props.children}
       
-      <AuthModal/>
-      
-      </Container>
+        {props.children}
+
+        <AuthModal />
+        
     </div>
   );
 }

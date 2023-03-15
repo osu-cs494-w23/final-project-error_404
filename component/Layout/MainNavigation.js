@@ -16,7 +16,7 @@ const HomePage = () => {
   };
 
   return (
-    <Navbar bg="dark" expand="lg" variant="dark">
+    <Navbar bg="transparent" expand="lg" variant="dark">
       <Container>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse>
