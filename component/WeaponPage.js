@@ -1,4 +1,10 @@
+import useWeapons from "./Hooks/getWeapons";
+
 const WeaponPage = () => {
+    const [ weapons , loading , error ] = useWeapons();
+    console.log(weapons)
+    //console.log(loading)
+    //console.log(error)
     return(
         <>
             <h1>Weapons</h1>
