@@ -1,23 +1,42 @@
+//Bootstrap Components
+import Card from 'react-bootstrap/Card'
+import Image  from 'react-bootstrap/Image';
+import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container';
+
+//Hook and css
 import useWeapons from "./Hooks/getWeapons";
+import classes from "./WeaponPage.module.css";
+
+//Navigation 
+import Link from 'next/link'
+import { useRouter } from 'next/router';
+
 
 const WeaponPage = () => {
     const [ weapons , loading , error ] = useWeapons();
     console.log(weapons)
     //console.log(loading)
     //console.log(error)
+    const router = useRouter()
     return(
-        <>
-            <h1>Weapons</h1>
-            <img src="https://media.valorant-api.com/weapons/63e6c2b6-4a8e-869c-3d4c-e38355226584/displayicon.png"></img>
-            <h2>Name: </h2>
-            <h2>Weapon Stats: </h2>
-
-            <h3>Fire Rate: </h3>
-            <h3>Magazine Size: </h3>
-            
-            
-        </>
-        
+        <Container>
+                <h1 className={classes.weaponHeading}>List of Valorant weapons</h1>
+                {weapons.map((weapon) => (
+                    <>
+                    {/* <Link href={`${router.asPath}/${weapon.uuid}`}> */}
+                    <Link href={`${router.asPath}/${weapon.displayName}`}>
+                    <Card key={weapon.uuid} className={classes.weaponCard}>
+                        <Card.Img src={weapon.displayIcon} alt="Card image" className={classes.weaponImage}/>
+                        <Card.ImgOverlay  >
+                            <Card.Title style={{ color: 'white' }}>{weapon.displayName}</Card.Title>
+                        </Card.ImgOverlay>
+                    </Card>
+                    </Link> 
+                    </>
+                ))}
+                
+        </Container>
     )
   };
   

@@ -24,6 +24,7 @@
     "react-bootstrap-icons": "^1.10.2",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
+    "react-responsive": "^9.0.2",
     "react-rotating-text": "^1.4.1"
   }
 }
