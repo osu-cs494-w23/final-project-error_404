@@ -7,20 +7,19 @@
     background:#181a1b;
     display: inline-block;
     border: 1px solid dimgray;
-    padding: 5px;
-    /* height: 300px;
-    width: 300px; */
-    /* max-width: 400px;
-    max-height: 300px; */
+    padding: 25px;
+    width: 415px;
+
 }
 .weaponCard:hover{
     border: 1px solid goldenrod;
 }
 
 .weaponImage{
-    float: center; 
-    /* height: auto; 
-    width: auto; 
-    max-width: 200px; 
-    max-height: 200px; */
+    width: max-content;  
+    height: 65px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
 }

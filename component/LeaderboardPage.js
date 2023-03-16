@@ -54,7 +54,7 @@ const LeaderboardToolbar = (props) => {
     const { region, onRegionChange, perPage, onPerPageChange, query, onQueryChange } = props
 
     return (
-        <Container>
+
             <ButtonToolbar className='d-flex justify-content-around' style={{ marginTop: '1rem' }}>
                 <DropdownButton id="region-dropdown" title={region}>
                     <Dropdown.Item onClick={() => onRegionChange('na')}>na</Dropdown.Item>
@@ -72,7 +72,7 @@ const LeaderboardToolbar = (props) => {
                     <Dropdown.Item onClick={() => onPerPageChange(100)}>100</Dropdown.Item>
                 </DropdownButton>
             </ButtonToolbar>
-        </Container>       
+               
     )
 }
 
@@ -85,7 +85,7 @@ const Leaderboard = (props) => {
 
     if (loading) {
         return (
-            <div className='d-flex justify-content-center'>
+            <div className='d-flex justify-content-center mt-5'>
                 <Spinner animation='border' />
             </div>
         )
@@ -100,8 +100,8 @@ const Leaderboard = (props) => {
     }
 
     return (
-        <Container>
-            <Table striped bordered hover responsive style={{ marginTop: '1rem' }}>
+        
+            <Table bordered hover responsive style={{ marginTop: '1rem', color: "white"}}>
                 <thead>
                     <tr>
                         <th>Rank</th>
@@ -118,7 +118,7 @@ const Leaderboard = (props) => {
                     ))}
                 </tbody>
             </Table>
-        </Container>
+        
     )
 }
 
@@ -164,10 +164,10 @@ const LeaderboardPage = () => {
     }
 
     return (
-        <>
+        <Container>
             <LeaderboardToolbar {...leaderboardToolbarProps} />
             <Leaderboard {...leaderboardProps} />
-        </>
+        </Container>
     )
 }
 
