@@ -2,17 +2,21 @@ import useAgentsList from "./Hooks/useAgentsList";
 //import Spinner from "./UI/Spinner";
 //import ErrorContainer from "./UI/ErrorContainer";
 import classes from "./AgentPage.module.css";
-import Card from "react-bootstrap/Card"
 import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
 import {useState , useEffect} from 'react';
 import { useRouter } from 'next/router';
+import { useMediaQuery } from 'react-responsive'
 
 const AgentPage = () => {
     const router = useRouter()
     const [ agents , loading , error ] = useAgentsList();
     const [currentSelector,setSelector] = useState("");
     const [currentAbility,setAbility] = useState("Q");
+
+    //responsive check
+    const isWideScreen = useMediaQuery({ query: '(min-width: 995px)' })
+    const isWidestScreen = useMediaQuery({ query: '(min-width: 1200px)' })
 
     useEffect(() => {
         //console.log(router.query.charName);
@@ -50,17 +54,17 @@ const AgentPage = () => {
                 
                 Object.values(agents.data).map((char)=>(
                     <div key={char.uuid+"_upper"}>
-                        {/* {console.log(char.displayName.toLowerCase() + " == " + currentSelector.toLowerCase())}
-                        {console.log(char.displayName.toLowerCase() == currentSelector.toLowerCase())} */}
                         {
                             char.displayName.toLowerCase() == currentSelector.toLowerCase() ?
                             <div className={classes.upperContainer}>
+                                {isWideScreen && 
                                 <div className={classes.upperImgContainer}>
                                     <img className={classes.charPic} src={char.fullPortrait} alt={char.displayName+"_picture"}></img>
                                 </div>
+                                }
                                 <div className={classes.upperRight}>
                                     <div className={classes.bio}>
-                                        <img className={classes.charIcon} src={char.displayIcon} alt={char.displayName+"_icon"}></img>
+                                        {isWideScreen && <img className={classes.charIcon} src={char.displayIcon} alt={char.displayName+"_icon"}></img>}
                                         <div className={classes.bioDetail}>
                                             <div className={classes.title}>
                                                 <h1 className={classes.titleText}>{char.displayName}</h1>
@@ -85,34 +89,51 @@ const AgentPage = () => {
                                         {
                                             (currentAbility=='Q') ?
                                                 <>
+                                                    {
+                                                    isWidestScreen &&
+                                                    <>
                                                     <h4>Q</h4>
                                                     <img className={classes.slotIcon} src={char.abilities[0].displayIcon} alt={char.displayName+"_AIcon"}></img>
                                                     <h4>{char.abilities[0].displayName}</h4>
                                                     <h4 className={classes.abilityEach}>&#10148;</h4>
+                                                    </>
+                                                    }
                                                     <p>{char.abilities[0].description}</p>
                                                 </>
                                             : (currentAbility=='E') ?
                                                 <>
+                                                    {isWidestScreen && 
+                                                    <>
                                                     <h4>E</h4>
                                                     <img className={classes.slotIcon} src={char.abilities[1].displayIcon} alt={char.displayName+"_AIcon"}></img>
                                                     <h4>{char.abilities[1].displayName}</h4>
                                                     <h4 className={classes.abilityEach}>&#10148;</h4>
+                                                    </>
+                                                    }
                                                     <p>{char.abilities[1].description}</p>
                                                 </> 
                                             : (currentAbility=='C') ?
                                                 <>
+                                                    {isWidestScreen && 
+                                                    <>
                                                     <h4>C</h4>
                                                     <img className={classes.slotIcon} src={char.abilities[2].displayIcon} alt={char.displayName+"_AIcon"}></img>
                                                     <h4>{char.abilities[2].displayName}</h4>
                                                     <h4 className={classes.abilityEach}>&#10148;</h4>
+                                                    </>
+                                                    }
                                                     <p>{char.abilities[2].description}</p>
                                                 </>
                                             :
                                                 <>
+                                                    {isWidestScreen && 
+                                                    <>
                                                     <h4>X</h4>
                                                     <img className={classes.slotIcon} src={char.abilities[3].displayIcon} alt={char.displayName+"_AIcon"}></img>
                                                     <h4>{char.abilities[3].displayName}</h4>
                                                     <h4 className={classes.abilityEach}>&#10148;</h4>
+                                                    </>
+                                                    }
                                                     <p>{char.abilities[3].description}</p>
                                                 </>
                                         }

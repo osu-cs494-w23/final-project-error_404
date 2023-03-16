@@ -88,6 +88,7 @@
     color: #b78460;
     justify-content: center;
     background-color: black;
+    cursor: pointer;
 }
 
 .errorMes{
@@ -204,4 +205,5 @@
     border: 2px solid rgba(251,109,95);
     border-radius: 10%;
     color: rgba(251,109,95);
+    cursor: pointer;
 }
