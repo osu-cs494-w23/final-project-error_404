@@ -1,9 +1,4 @@
 
-/*source*/
-@font-face{
-  font-family: 'Tungsten-Bold';
-  src: url('./Tungsten-Bold.ttf') format('truetype')
-}
 
 /*when use*/
 .note {
