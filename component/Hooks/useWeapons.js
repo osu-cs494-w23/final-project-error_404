@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 
-function getWeapons(){
+function useWeapons(){
     const [weapons, setWeapons] = useState([]) //store in array
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
@@ -54,4 +54,4 @@ function getWeapons(){
     }, []) 
     return [weapons, loading, error]
 }
-export default getWeapons
+export default useWeapons

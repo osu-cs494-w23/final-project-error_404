@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Spinner, Table, ButtonToolbar, DropdownButton, Dropdown, InputGroup, FormControl } from 'react-bootstrap'
+import { Spinner, Table, ButtonToolbar, DropdownButton, Dropdown, InputGroup, FormControl, Container } from 'react-bootstrap'
 
 function useLeaderboard(region) {
     const [ players, setPlayers ] = useState([])
@@ -54,25 +54,25 @@ const LeaderboardToolbar = (props) => {
     const { region, onRegionChange, perPage, onPerPageChange, query, onQueryChange } = props
 
     return (
-        <ButtonToolbar className='d-flex justify-content-around' style={{ marginTop: '1rem' }}>
-            <DropdownButton id="region-dropdown" title={region}>
-                <Dropdown.Item onClick={() => onRegionChange('na')}>na</Dropdown.Item>
-                <Dropdown.Item onClick={() => onRegionChange('eu')}>eu</Dropdown.Item>
-                <Dropdown.Item onClick={() => onRegionChange('ap')}>ap</Dropdown.Item>
-                <Dropdown.Item onClick={() => onRegionChange('kr')}>kr</Dropdown.Item>
-            </DropdownButton>
-
-            <InputGroup>
-                <FormControl placeholder='Search Player' onChange={onQueryChange} />
-            </InputGroup>
-
-            <DropdownButton id="page-size-dropdown" title={`${perPage} per page`}>
-                <Dropdown.Item onClick={() => onPerPageChange(10)}>10</Dropdown.Item>
-                <Dropdown.Item onClick={() => onPerPageChange(25)}>25</Dropdown.Item>
-                <Dropdown.Item onClick={() => onPerPageChange(50)}>50</Dropdown.Item>
-                <Dropdown.Item onClick={() => onPerPageChange(100)}>100</Dropdown.Item>
-            </DropdownButton>
-        </ButtonToolbar>        
+        <Container>
+            <ButtonToolbar className='d-flex justify-content-around' style={{ marginTop: '1rem' }}>
+                <DropdownButton id="region-dropdown" title={region}>
+                    <Dropdown.Item onClick={() => onRegionChange('na')}>na</Dropdown.Item>
+                    <Dropdown.Item onClick={() => onRegionChange('eu')}>eu</Dropdown.Item>
+                    <Dropdown.Item onClick={() => onRegionChange('ap')}>ap</Dropdown.Item>
+                    <Dropdown.Item onClick={() => onRegionChange('kr')}>kr</Dropdown.Item>
+                </DropdownButton>
+                <InputGroup>
+                    <FormControl placeholder='Search Player' onChange={onQueryChange} />
+                </InputGroup>
+                <DropdownButton id="page-size-dropdown" title={`${perPage} per page`}>
+                    <Dropdown.Item onClick={() => onPerPageChange(10)}>10</Dropdown.Item>
+                    <Dropdown.Item onClick={() => onPerPageChange(25)}>25</Dropdown.Item>
+                    <Dropdown.Item onClick={() => onPerPageChange(50)}>50</Dropdown.Item>
+                    <Dropdown.Item onClick={() => onPerPageChange(100)}>100</Dropdown.Item>
+                </DropdownButton>
+            </ButtonToolbar>
+        </Container>       
     )
 }
 
@@ -100,23 +100,25 @@ const Leaderboard = (props) => {
     }
 
     return (
-        <Table striped bordered hover responsive style={{ marginTop: '1rem' }}>
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Username</th>
-                </tr>
-            </thead>
-            <tbody>
-                {console.log(currentPlayers)}
-                {currentPlayers.map((player, index) => (
-                    <tr key={index}>
-                        <td>{player.leaderboardRank}</td>
-                        <td>{player.gameName}</td>
+        <Container>
+            <Table striped bordered hover responsive style={{ marginTop: '1rem' }}>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
                     </tr>
-                ))}
-            </tbody>
-        </Table>
+                </thead>
+                <tbody>
+                    {console.log(currentPlayers)}
+                    {currentPlayers.map((player, index) => (
+                        <tr key={index}>
+                            <td>{player.leaderboardRank}</td>
+                            <td>{player.gameName}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        </Container>
     )
 }
 

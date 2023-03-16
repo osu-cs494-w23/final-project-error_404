@@ -5,7 +5,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
 
 //Hook and css
-import useWeapons from "./Hooks/getWeapons";
+import useWeapons from "./Hooks/useWeapons";
 import classes from "./WeaponPage.module.css";
 
 //Navigation 
