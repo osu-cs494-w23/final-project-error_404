@@ -1,0 +1,11 @@
+/* CSS for the main Weapons cards */
+.weaponCard{
+    width: 24rem; 
+    background:#181a1b;
+    display: inline-block;
+    border: 1px solid dimgray;
+    padding: 10px;
+
+    max-width: 400px;
+    max-height: 300px;
+}

@@ -1,4 +1,7 @@
-import Container  from "react-bootstrap";
+import Image  from 'react-bootstrap/Image';
+import classes from "./WeaponPage.module.css";
+import Card from 'react-bootstrap/Card'
+import Container from 'react-bootstrap/Container';
 import useWeapons from "./Hooks/getWeapons";
 
 const WeaponPage = () => {
@@ -7,18 +10,20 @@ const WeaponPage = () => {
     //console.log(loading)
     //console.log(error)
     return(
-        <>
         <Container>
-            <h1>Weapons</h1>
-            <img src="https://media.valorant-api.com/weapons/63e6c2b6-4a8e-869c-3d4c-e38355226584/displayicon.png"></img>
-            <h2>Name: </h2>
-            <h2>Weapon Stats: </h2>
-
-            <h3>Fire Rate: </h3>
-            <h3>Magazine Size: </h3>
+                <h1>List of Valorant weapons</h1>
+                {weapons.map((weapon) => (
+                    <>
+                    <Card key={weapon.uuid} className={classes.weaponCard}>
+                        <Card.Img src={weapon.displayIcon} alt="Card image" />
+                        <Card.ImgOverlay >
+                            <Card.Title style={{ color: 'white' }}>{weapon.displayName}</Card.Title>
+                        </Card.ImgOverlay>
+                    </Card>
+                    </>
+                ))}
+                
         </Container>
-            
-        </>
     )
   };
   
