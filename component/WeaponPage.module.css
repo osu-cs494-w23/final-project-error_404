@@ -1,11 +1,26 @@
+.weaponHeading{
+    color: white;
+}
 /* CSS for the main Weapons cards */
 .weaponCard{
     width: 24rem; 
     background:#181a1b;
     display: inline-block;
     border: 1px solid dimgray;
-    padding: 10px;
+    padding: 5px;
+    /* height: 300px;
+    width: 300px; */
+    /* max-width: 400px;
+    max-height: 300px; */
+}
+.weaponCard:hover{
+    border: 1px solid goldenrod;
+}
 
-    max-width: 400px;
-    max-height: 300px;
+.weaponImage{
+    float: center; 
+    /* height: auto; 
+    width: auto; 
+    max-width: 200px; 
+    max-height: 200px; */
 }
