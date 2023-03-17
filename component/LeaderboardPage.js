@@ -1,54 +1,7 @@
-import { useEffect, useState } from 'react'
-import { Spinner, Table, ButtonToolbar, DropdownButton, Dropdown, InputGroup, FormControl, Container } from 'react-bootstrap'
+import { useState } from 'react'
+import { Spinner, ButtonToolbar, DropdownButton, Dropdown, InputGroup, FormControl, Container, ListGroup } from 'react-bootstrap'
 
-function useLeaderboard(region) {
-    const [ players, setPlayers ] = useState([])
-    const [ loading, setLoading ] = useState(true)
-    const [ error, setError ] = useState(false)
-
-    useEffect(() => {
-        let ignore = false
-        const controller = new AbortController()
-        async function fetchPlayers() {
-            setLoading(true)
-            let responseBody = {}
-            try {
-                const response = await fetch(
-                    'https://api.henrikdev.xyz/valorant/v1/leaderboard/' + region,
-                    { signal: controller.signal }
-                )
-                if (response.status !== 200) {
-                    setError(true)
-                } else {
-                    setError(false)
-                    responseBody = await response.json()
-                }
-            } catch (e) {
-                if (e instanceof DOMException) {
-                    console.log('HTTP request aborted')
-                } else {
-                    setError(true)
-                    console.error("Error:", e)
-                    throw e
-                }
-            }
-
-            if (!ignore) {
-                setPlayers(responseBody || [])
-                setLoading(false)
-            }
-        }
-        if (region) {
-            fetchPlayers()
-        }
-        return () => {
-            controller.abort()
-            ignore = true
-        }
-    }, [ region ])
-    
-    return [ players, loading, error ]
-}
+import useLeaderboard from './Hooks/useLeaderboard'
 
 const LeaderboardToolbar = (props) => {
     const { region, onRegionChange, perPage, onPerPageChange, query, onQueryChange } = props
@@ -100,25 +53,26 @@ const Leaderboard = (props) => {
     }
 
     return (
-        
-            <Table bordered hover responsive style={{ marginTop: '1rem', color: "white"}}>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {console.log(currentPlayers)}
-                    {currentPlayers.map((player, index) => (
-                        <tr key={index}>
-                            <td>{player.leaderboardRank}</td>
-                            <td>{player.gameName}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        
+        <ListGroup className='mt-3'>
+            <ListGroup.Item className='d-flex justify-content-between align-items-center'>
+                <div>
+                    <strong>Rank - Username</strong>
+                </div>
+                <div>
+                    <strong>Ranked Rating</strong>
+                </div>
+            </ListGroup.Item>
+            {currentPlayers.map((player, index) => (
+                <ListGroup.Item key={index} className='d-flex justify-content-between align-items-center'>
+                    <div>
+                        <p>{player.leaderboardRank} - {player.gameName}</p>
+                    </div>
+                    <div>
+                        <p>{player.rankedRating}</p>
+                    </div>
+                </ListGroup.Item>
+            ))}
+        </ListGroup>
     )
 }
 
@@ -131,8 +85,7 @@ const LeaderboardPage = () => {
     const [ players, loading, error ] = useLeaderboard(region)
 
     const onQueryChange = (e) => {
-        setQuery(e.target.value)
-        setPage(1)
+        // TODO: Implement search
     }
 
     const onRegionChange = (e) => {
