@@ -27,12 +27,12 @@ const WeaponPage = () => {
                         <>
                         {/* <Link href={`${router.asPath}/${weapon.uuid}`}> */}
                         <Link href={`${router.asPath}/${weapon.displayName}`}>
-                        <Card key={weapon.uuid} className={classes.weaponCard} >
-                            <Card.Img src={weapon.displayIcon} alt="Card image" className={classes.weaponImage}/>
-                            <Card.ImgOverlay  >
-                                <Card.Title style={{ color: 'white' }}>{weapon.displayName}</Card.Title>
-                            </Card.ImgOverlay>
-                        </Card>
+                            <Card key={weapon.uuid} className={classes.weaponCard} >
+                                <Card.Img src={weapon.displayIcon} alt="Card image" className={classes.weaponImage}/>
+                                <Card.ImgOverlay  >
+                                    <Card.Title style={{ color: 'white' }}>{weapon.displayName}</Card.Title>
+                                </Card.ImgOverlay>
+                            </Card>
                         </Link>
                         </>
                     ))}
