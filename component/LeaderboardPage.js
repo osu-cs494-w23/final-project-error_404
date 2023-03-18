@@ -1,23 +1,35 @@
-import { useState } from 'react'
-import { Spinner, ButtonToolbar, DropdownButton, Dropdown, InputGroup, FormControl, Container, ListGroup } from 'react-bootstrap'
+import { useState, useEffect } from 'react'
+import { Spinner, ButtonToolbar, DropdownButton, Button, Dropdown, InputGroup, Form, FormControl, Container, ListGroup } from 'react-bootstrap'
+import { useRouter } from 'next/router'
+import classes from './LeaderboardPage.module.css'
 
 import useLeaderboard from './Hooks/useLeaderboard'
 
 const LeaderboardToolbar = (props) => {
     const { region, onRegionChange, perPage, onPerPageChange, query, onQueryChange } = props
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
+
     return (
 
-            <ButtonToolbar className='d-flex justify-content-around' style={{ marginTop: '1rem' }}>
+            <ButtonToolbar className='d-flex justify-content-around'>
                 <DropdownButton id="region-dropdown" title={region}>
                     <Dropdown.Item onClick={() => onRegionChange('na')}>na</Dropdown.Item>
                     <Dropdown.Item onClick={() => onRegionChange('eu')}>eu</Dropdown.Item>
                     <Dropdown.Item onClick={() => onRegionChange('ap')}>ap</Dropdown.Item>
                     <Dropdown.Item onClick={() => onRegionChange('kr')}>kr</Dropdown.Item>
                 </DropdownButton>
-                <InputGroup>
-                    <FormControl placeholder='Search Player' onChange={onQueryChange} />
-                </InputGroup>
+                <Form onSubmit={handleSubmit} className={classes.searchForm}>
+                    <FormControl placeholder='Search Player' 
+                                 type='text' 
+                                 value={query} 
+                                 onChange={onQueryChange}
+                                 className={classes.searchInput}
+                    />
+                    <Button type="submit" variant="primary">Search</Button>
+                </Form>
                 <DropdownButton id="page-size-dropdown" title={`${perPage} per page`}>
                     <Dropdown.Item onClick={() => onPerPageChange(10)}>10</Dropdown.Item>
                     <Dropdown.Item onClick={() => onPerPageChange(25)}>25</Dropdown.Item>
@@ -53,8 +65,8 @@ const Leaderboard = (props) => {
     }
 
     return (
-        <ListGroup className='mt-3'>
-            <ListGroup.Item className='d-flex justify-content-between align-items-center'>
+        <ListGroup className={classes.leaderboardList}>
+            <ListGroup.Item className={classes.leaderboardTitleRow}>
                 <div>
                     <strong>Rank - Username</strong>
                 </div>
@@ -63,7 +75,7 @@ const Leaderboard = (props) => {
                 </div>
             </ListGroup.Item>
             {currentPlayers.map((player, index) => (
-                <ListGroup.Item key={index} className='d-flex justify-content-between align-items-center'>
+                <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
                     <div>
                         <p>{player.leaderboardRank} - {player.gameName}</p>
                     </div>
@@ -83,10 +95,18 @@ const LeaderboardPage = () => {
     const [ page, setPage ] = useState(1)
 
     const [ players, loading, error ] = useLeaderboard(region)
+    const router = useRouter()
 
-    const onQueryChange = (e) => {
-        // TODO: Implement search
-    }
+    useEffect(() => {
+        router.push({
+            pathname: '/leaderboard',
+            query: {
+                region,
+                perPage,
+                query
+            }
+        })
+    }, [region, perPage, query])
 
     const onRegionChange = (e) => {
         setRegion(e)
@@ -95,6 +115,11 @@ const LeaderboardPage = () => {
 
     const onPerPageChange = (e) => {
         setPerPage(e)
+        setPage(1)
+    }
+
+    const onQueryChange = (e) => {
+        setQuery(e.target.value)
         setPage(1)
     }
 
