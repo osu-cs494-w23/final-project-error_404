@@ -23,6 +23,11 @@ const WeaponPage = () => {
         <Container >
                 <h1 className={classes.weaponHeading}>List of Valorant weapons</h1>
                 <div className="d-flex gap-4 flex-wrap mt-5">
+                {error && <Container><h1>Error with fetching weapon data</h1></Container>}
+                { loading ? <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner> : (
+                    <>
                     {weapons.map((weapon) => (
                         <>
                         {/* <Link href={`${router.asPath}/${weapon.uuid}`}> */}
@@ -36,8 +41,9 @@ const WeaponPage = () => {
                         </Link>
                         </>
                     ))}
+                    </>
+                )}
                 </div>
-                
         </Container>
     )
   };

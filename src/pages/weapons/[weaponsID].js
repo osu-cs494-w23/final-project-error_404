@@ -1,6 +1,7 @@
 //Bootstrap Components
 import Container from 'react-bootstrap/Container';
 import Image  from 'react-bootstrap/Image';
+import Spinner from 'react-bootstrap/Spinner';
 //Hook and css
 import useWeapons from "../../../component/Hooks/useWeapons";
 //import classes from "./.module.css";
@@ -26,7 +27,7 @@ export default function Weapon(){
     console.log(currentWeapon)
     //console.log(error)
 
-    return currentWeapon ?(
+    return currentWeapon ? (
         <Container>
             <h1 style={{ color: 'white' }}> {currentWeapon.displayName}</h1>
             <Image src={currentWeapon.displayIcon}></Image>
@@ -44,5 +45,14 @@ export default function Weapon(){
 
         </Container>
         
-    ) : <h1>Error</h1>
+    ) : (
+        <Container>
+            {error && <Container><h1>Error with fetching weapon data</h1></Container>}
+            {loading &&
+                <Spinner animation="border" role="status" style={{ width: "18rem", height: "18rem" }}>
+                    <span className="visually-hidden"></span>
+                </Spinner> 
+            }
+        </Container>
+    )
 }
