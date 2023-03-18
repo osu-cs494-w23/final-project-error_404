@@ -1,0 +1,25 @@
+.leaderboardList {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.leaderboardTitleRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+
+.leaderboardPlayerRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+}
+
+.searchForm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchInput {
+    margin-right: 1rem;
+}
