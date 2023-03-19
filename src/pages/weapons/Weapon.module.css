@@ -1,0 +1,24 @@
+.container {
+    color: #e8e6e3;
+    display: flex;
+    flex-direction: column;
+}
+.infoDiv {
+    display: flex;
+}
+.infoDiv > div {
+    flex: 1; 
+}
+
+.listItems{
+    color: rgba(251,109,95);
+    list-style-type: none;
+}
+.weaponImage{
+    width: max-content;
+    height: 150px;
+    /* display: block; */
+    margin-left: auto;
+    margin-right: auto;
+
+}
