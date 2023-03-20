@@ -1,8 +1,14 @@
 .container {
     color: #e8e6e3;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
+
+.weaponDiv{
+    width:800px; /* hard coded width for now */
+}
+
+
 .infoDiv {
     display: flex;
 }
@@ -17,8 +23,10 @@
 .weaponImage{
     width: max-content;
     height: 150px;
-    /* display: block; */
+    display: block;
     margin-left: auto;
     margin-right: auto;
 
 }
+
+/* Skins Div */

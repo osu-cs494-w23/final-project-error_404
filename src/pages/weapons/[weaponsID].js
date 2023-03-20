@@ -5,17 +5,20 @@ import Spinner from 'react-bootstrap/Spinner';
 //Hook and css
 import useWeapons from "../../../component/Hooks/useWeapons";
 import classes from "./Weapon.module.css";
+import {useState , useEffect} from 'react';
 
 //Navigation
 import {useRouter} from 'next/router'
+import { Button } from 'react-bootstrap';
 
 export default function Weapon(){
     /* Ideally, it would be great if the router.query contained the uuid and we do one API call to get the information of the weapon.
     *  However, this would affect the URL. Using the name, we can get all weapons, and find the specific weapon. 
     */
     const router = useRouter()
+    const [index, setIndex] = useState(0)
     const [ weapons , loading , error ] = useWeapons(); //could it be possible to get the uuid from the parent page eg. /weapons? 
-    // const currentWeapon = weapons.find(displayName => displayName = router.query.weaponsID)
+
     let currentWeapon = null
     //standard for loop to iterate through weapons array
     for(var i = 0; i < weapons.length;i++){
@@ -23,10 +26,38 @@ export default function Weapon(){
             currentWeapon = weapons[i]
         }
     }
-    console.log("router.query:", router.query)
-    console.log(currentWeapon)
-    //console.log(error)
 
+    let currentSkins = null
+    //Let's take out any skins that would not display properly
+    if(currentWeapon != null){
+        currentSkins = currentWeapon.skins
+        for(var i = 0; i < currentSkins.length; i++){
+            //these are conditions for removal
+            if(currentSkins[i].displayIcon == null || currentSkins[i].displayName == "Random Favorite Skin"){
+                console.log("Removed")
+                currentSkins.splice(i, 1)
+            }
+        }
+    }
+
+    const incrementIndex = () => {
+        if(index != currentSkins.length-1){
+            setIndex(index +1);
+        }
+        console.log("New index:", index)
+    };
+    const decrementIndex = () => {
+        if(index != 0){
+            setIndex(index - 1);
+        }
+        
+        console.log("New index:", index)
+    };
+
+    //console.log("router.query:", router.query)
+    //console.log(currentWeapon)
+    //console.log(error)
+    
     // Special case: if currentWeapon's displayName is Knife, 
     //then it will have a different page since many fields such as shop data will be null. 
     if(currentWeapon != null && currentWeapon.displayName === "Melee"){
@@ -38,7 +69,7 @@ export default function Weapon(){
     }
     return currentWeapon ? (
         <Container className={classes.container}>
-            {/* <div className=''> */}
+            <div className={classes.weaponDiv}>
                 <h1> {currentWeapon.displayName}</h1>
                 <Image src={currentWeapon.displayIcon} className={classes.weaponImage}></Image>
 
@@ -62,14 +93,33 @@ export default function Weapon(){
 
                     <div className='damageDiv'>
                         <h2>Damage Stats</h2>
-                        <ul>
-
+                        <ul className={classes.listItems}>
+                            <li>Body: {currentWeapon.weaponStats.damageRanges[0].bodyDamage}hp</li>
+                            <li>Head: {currentWeapon.weaponStats.damageRanges[0].headDamage}hp</li>
+                            <li>Leg: {currentWeapon.weaponStats.damageRanges[0].legDamage.toFixed(2)} hp</li>
                         </ul>
                     </div>
                 </Container>
+            </div>
 
-            {/* </div> */}
-            
+            <div className="skinsDiv">
+                <h2>Skins</h2>
+                <ul className={classes.listItems}>
+                    <li>{currentWeapon.skins[index].displayName}<Image src={currentWeapon.skins[index].displayIcon} className={classes.weaponImage}></Image> </li>
+                    <button onClick={decrementIndex} >Prev</button>
+                    <button onClick={incrementIndex} >Next</button>
+                    {/* {currentWeapon.skins.map((skin) => (
+                        (skin.displayIcon && skin.displayName != "Random Favorite Skin") && (
+                        <>
+                            <li>{skin.displayName}<Image src={skin.displayIcon} className={classes.weaponImage}></Image> </li>
+                            <button >Prev</button>
+                            <button >Next</button>
+                        </>
+                        ) 
+                    ))} */}
+                    
+                </ul>
+            </div>
         </Container>
         
     ) : (
