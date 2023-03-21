@@ -16,4 +16,6 @@ a {
   text-decoration: none;
 }
 
-
+input::placeholder{
+    color: white !important;
+}

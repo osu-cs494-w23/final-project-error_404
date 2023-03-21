@@ -1,9 +1,8 @@
 import { Fragment } from "react";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import classes from "./WelcomePage.module.css";
 import ReactRotatingText from "react-rotating-text";
+import InputSearch from "./UI/inputSearch";
 
 const WelcomePage = () => {
   return (
@@ -18,7 +17,7 @@ const WelcomePage = () => {
           </h1>
         </div>
         <div>
-          <input></input>
+          <InputSearch></InputSearch>
         </div>
       </div>
     </Container>

@@ -1,0 +1,12 @@
+.search_group input {
+    background-color: transparent !important;
+    color: white;
+    max-width: 450px;
+    min-width: 350px;
+    height: 60px;
+    font-size: x-large;
+    border-radius: 0px;
+    border: none;
+    border-bottom: solid 1px white !important;
+}
+
