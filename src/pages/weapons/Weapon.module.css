@@ -8,13 +8,12 @@
     width:800px; /* hard coded width for now */
 }
 
-
-.infoDiv {
+/* .infoDiv {
     display: flex;
 }
 .infoDiv > div {
     flex: 1; 
-}
+} */
 
 .listItems{
     color: rgba(251,109,95);
@@ -29,4 +28,13 @@
 
 }
 
-/* Skins Div */
+/* Skins Div*/
+.skinImage{
+    width: max-content;
+    max-width: 500px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
