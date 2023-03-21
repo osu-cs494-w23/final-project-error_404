@@ -94,8 +94,8 @@ export default function Weapon(){
                     <div className='damageDiv'>
                         <h2>Damage Stats</h2>
                         <ul className={classes.listItems}>
-                            <li>Body: {currentWeapon.weaponStats.damageRanges[0].bodyDamage}hp</li>
                             <li>Head: {currentWeapon.weaponStats.damageRanges[0].headDamage}hp</li>
+                            <li>Body: {currentWeapon.weaponStats.damageRanges[0].bodyDamage}hp</li>
                             <li>Leg: {currentWeapon.weaponStats.damageRanges[0].legDamage.toFixed(2)} hp</li>
                         </ul>
                     </div>
@@ -105,7 +105,8 @@ export default function Weapon(){
             <div className="skinsDiv">
                 <h2>Skins</h2>
                 <ul className={classes.listItems}>
-                    <li>{currentWeapon.skins[index].displayName}<Image src={currentWeapon.skins[index].displayIcon} className={classes.weaponImage}></Image> </li>
+                    <li>{currentWeapon.skins[index].displayName}<Image src={currentWeapon.skins[index].displayIcon} className={classes.skinImage}></Image> </li>
+                    <li>{index + 1}/{currentSkins.length}</li>
                     <button onClick={decrementIndex} >Prev</button>
                     <button onClick={incrementIndex} >Next</button>
                     {/* {currentWeapon.skins.map((skin) => (
