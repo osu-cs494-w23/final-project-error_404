@@ -82,6 +82,9 @@ const AuthModal = () => {
 
     console.log(result)
     
+    if (!result.error){
+      dispatch(modalAction.changeModalState())
+    }
     console.log("Clicked Sign In")
 
   };
