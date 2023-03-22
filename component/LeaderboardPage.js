@@ -6,46 +6,46 @@ import classes from './LeaderboardPage.module.css'
 import useLeaderboard from './Hooks/useLeaderboard'
 
 const LeaderboardToolbar = (props) => {
-    const { region, onRegionChange, perPage, onPerPageChange, query, onQueryChange } = props
+    const { inputRegion, setInputRegion, inputPerPage, setInputPerPage, inputQuery, setInputQuery } = props
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const router = useRouter()
+
+    console.log(props)
+
+    const handleRegionChange = (region) => {
+        setInputRegion(region)
+        router.push(`/leaderboard/${region}`)
     }
 
     return (
-
-            <ButtonToolbar className='d-flex justify-content-around'>
-                <DropdownButton id="region-dropdown" title={region}>
-                    <Dropdown.Item onClick={() => onRegionChange('na')}>na</Dropdown.Item>
-                    <Dropdown.Item onClick={() => onRegionChange('eu')}>eu</Dropdown.Item>
-                    <Dropdown.Item onClick={() => onRegionChange('ap')}>ap</Dropdown.Item>
-                    <Dropdown.Item onClick={() => onRegionChange('kr')}>kr</Dropdown.Item>
-                </DropdownButton>
-                <Form onSubmit={handleSubmit} className={classes.searchForm}>
-                    <FormControl placeholder='Search Player' 
-                                 type='text' 
-                                 value={query} 
-                                 onChange={onQueryChange}
-                                 className={classes.searchInput}
-                    />
-                    <Button type="submit" variant="primary">Search</Button>
-                </Form>
-                <DropdownButton id="page-size-dropdown" title={`${perPage} per page`}>
-                    <Dropdown.Item onClick={() => onPerPageChange(10)}>10</Dropdown.Item>
-                    <Dropdown.Item onClick={() => onPerPageChange(25)}>25</Dropdown.Item>
-                    <Dropdown.Item onClick={() => onPerPageChange(50)}>50</Dropdown.Item>
-                    <Dropdown.Item onClick={() => onPerPageChange(100)}>100</Dropdown.Item>
-                </DropdownButton>
-            </ButtonToolbar>
-               
+        <div className={classes.leaderboardToolbar}>
+            <DropdownButton id="region-dropdown" title={inputRegion}>
+                <Dropdown.Item onClick={() => handleRegionChange('na')}>na</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleRegionChange('eu')}>eu</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleRegionChange('ap')}>ap</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleRegionChange('kr')}>kr</Dropdown.Item>
+            </DropdownButton>
+            <FormControl    placeholder='Search Player' 
+                            type='text' 
+                            value={inputQuery} 
+                            onChange={e => setInputQuery(e.target.value)}
+                            className={classes.searchInput}
+            />
+            <DropdownButton id="page-size-dropdown" title={`${inputPerPage} per page`}>
+                <Dropdown.Item onClick={() => setInputPerPage(10)}>10</Dropdown.Item>
+                <Dropdown.Item onClick={() => setInputPerPage(25)}>25</Dropdown.Item>
+                <Dropdown.Item onClick={() => setInputPerPage(50)}>50</Dropdown.Item>
+                <Dropdown.Item onClick={() => setInputPerPage(100)}>100</Dropdown.Item>
+            </DropdownButton>
+        </div> 
     )
 }
 
 const Leaderboard = (props) => {
-    const { players, loading, error, page, perPage, query } = props
+    const { players, loading, error, inputPerPage, inputQuery, page } = props
 
-    const indexOfLastPlayer = page * perPage
-    const indexOfFirstPlayer = indexOfLastPlayer - perPage
+    const indexOfLastPlayer = page * inputPerPage
+    const indexOfFirstPlayer = indexOfLastPlayer - inputPerPage
     const currentPlayers = players.slice(indexOfFirstPlayer, indexOfLastPlayer)
 
     if (loading) {
@@ -88,57 +88,34 @@ const Leaderboard = (props) => {
     )
 }
 
-const LeaderboardPage = () => {
-    const [ region, setRegion ] = useState('na')
-    const [ perPage, setPerPage ] = useState(10)
-    const [ query, setQuery ] = useState('')
-    const [ page, setPage ] = useState(1)
-
-    const [ players, loading, error ] = useLeaderboard(region)
+const LeaderboardPage = ({ region }) => {
     const router = useRouter()
 
-    useEffect(() => {
-        router.push({
-            pathname: '/leaderboard',
-            query: {
-                region,
-                perPage,
-                query
-            }
-        })
-    }, [region, perPage, query])
+    // set state for query params
+    const [ inputRegion, setInputRegion ] = useState(region)
+    const [ inputPerPage, setInputPerPage ] = useState(10)
+    const [ inputQuery, setInputQuery ] = useState('')
+    const [ page, setPage ] = useState(1) // pagination
 
-    const onRegionChange = (e) => {
-        setRegion(e)
-        setPage(1)
-    }
+    // fetch data
+    const [ players, loading, error ] = useLeaderboard(inputRegion)
 
-    const onPerPageChange = (e) => {
-        setPerPage(e)
-        setPage(1)
-    }
-
-    const onQueryChange = (e) => {
-        setQuery(e.target.value)
-        setPage(1)
+    const leaderboardToolbarProps = {
+        inputRegion,
+        setInputRegion,
+        inputPerPage,
+        setInputPerPage,
+        inputQuery,
+        setInputQuery
     }
 
     const leaderboardProps = {
         players,
         loading,
         error,
-        page,
-        perPage,
-        query
-    }
-
-    const leaderboardToolbarProps = {
-        region,
-        onRegionChange,
-        perPage,
-        onPerPageChange,
-        query,
-        onQueryChange
+        inputPerPage,
+        inputQuery,
+        page
     }
 
     return (
