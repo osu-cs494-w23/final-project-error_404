@@ -48,6 +48,9 @@ const Leaderboard = (props) => {
     const indexOfFirstPlayer = indexOfLastPlayer - inputPerPage
     const currentPlayers = players.slice(indexOfFirstPlayer, indexOfLastPlayer)
 
+    const allQueriedPlayers = players.filter(player => player.gameName.toLowerCase().includes(inputQuery.toLowerCase())) // all players that match the query
+    const currentQueriedPlayers = allQueriedPlayers.slice(indexOfFirstPlayer, indexOfLastPlayer) // players that match the query and are on the current page
+
     if (loading) {
         return (
             <div className='d-flex justify-content-center mt-5'>
@@ -74,16 +77,29 @@ const Leaderboard = (props) => {
                     <strong>Ranked Rating</strong>
                 </div>
             </ListGroup.Item>
-            {currentPlayers.map((player, index) => (
-                <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
-                    <div>
-                        <p>{player.leaderboardRank} - {player.gameName}</p>
-                    </div>
-                    <div>
-                        <p>{player.rankedRating}</p>
-                    </div>
-                </ListGroup.Item>
-            ))}
+            {inputQuery === '' ? ( // if there is no query, show the current players
+                currentPlayers.map((player, index) => (
+                    <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
+                        <div>
+                            <p>{player.leaderboardRank} - {player.gameName}</p>
+                        </div>
+                        <div>
+                            <p>{player.rankedRating}</p>
+                        </div>
+                    </ListGroup.Item>
+                ))
+            ) : ( // if there is a query, show the current queried players
+                currentQueriedPlayers.map((player, index) => (
+                    <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
+                        <div>
+                            <p>{player.leaderboardRank} - {player.gameName}</p>
+                        </div>
+                        <div>
+                            <p>{player.rankedRating}</p>
+                        </div>
+                    </ListGroup.Item>
+                ))
+            )}
         </ListGroup>
     )
 }
