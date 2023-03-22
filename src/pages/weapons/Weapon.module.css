@@ -3,7 +3,6 @@
     display: flex;
     /* flex-direction: column; */
 }
-
 .weaponDiv{
     width:800px; /* hard coded width for now */
 }
@@ -28,7 +27,6 @@
     margin-right: auto;
 
 }
-
 /* Skins Div*/
 .skinImage{
     width: max-content;
@@ -46,6 +44,4 @@
     font-size: 30px;
     transition: .6s ease;
     border-radius: 0 4px 4px 0
-    /* move to the center */
-    
 }
