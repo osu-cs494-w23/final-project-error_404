@@ -63,7 +63,10 @@ export default function Weapon(){
     if(currentWeapon != null && currentWeapon.displayName === "Melee"){
         return(
             <Container className={classes.container}>
-                <h1 > {currentWeapon.displayName}</h1>
+                <div className={classes.weaponDiv}>
+                    <h1 > {currentWeapon.displayName}</h1>
+                    <Image src={currentWeapon.displayIcon} className={classes.weaponImage}></Image>
+                </div>
             </Container>
         )
     }
@@ -107,8 +110,8 @@ export default function Weapon(){
                 <ul className={classes.listItems}>
                     <li>{currentWeapon.skins[index].displayName}<Image src={currentWeapon.skins[index].displayIcon} className={classes.skinImage}></Image> </li>
                     <li>{index + 1}/{currentSkins.length}</li>
-                    <button onClick={decrementIndex} >Prev</button>
-                    <button onClick={incrementIndex} >Next</button>
+                    <button onClick={decrementIndex} className={classes.arrowButton}>&#10094;</button>
+                    <button onClick={incrementIndex} className={classes.arrowButton}>&#10095;</button>
                     {/* {currentWeapon.skins.map((skin) => (
                         (skin.displayIcon && skin.displayName != "Random Favorite Skin") && (
                         <>
