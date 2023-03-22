@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 const AboutPage = () => {
 
   //responsive 
-  const isWideScreen = useMediaQuery({ query: '(min-width: 1100px)' })
+  const isWideScreen = useMediaQuery({ query: '(min-width: 1200px)' })
 
   return <>
     <div className={classes.big_container}>
