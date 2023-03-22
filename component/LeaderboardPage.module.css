@@ -3,6 +3,17 @@
     margin-bottom: 1rem;
 }
 
+/* leaderboardToolbar is a ListGroup with attribute 'horizontal' */
+.leaderboardToolbar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+
+.searchInput {
+    width: 20rem;
+}
+
 .leaderboardTitleRow {
     display: flex;
     justify-content: space-between;
@@ -13,13 +24,4 @@
     display: flex;
     justify-content: space-between;
     font-size: 1.25rem;
-}
-
-.searchForm {
-    display: flex;
-    justify-content: space-between;
-}
-
-.searchInput {
-    margin-right: 1rem;
 }
