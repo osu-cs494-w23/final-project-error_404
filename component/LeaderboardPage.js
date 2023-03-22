@@ -19,7 +19,7 @@ const LeaderboardToolbar = (props) => {
 
     return (
         <div className={classes.leaderboardToolbar}>
-            <DropdownButton id="region-dropdown" title={inputRegion}>
+            <DropdownButton id="region-dropdown" title={`Region: ${inputRegion}`} variant='light'>
                 <Dropdown.Item onClick={() => handleRegionChange('na')}>na</Dropdown.Item>
                 <Dropdown.Item onClick={() => handleRegionChange('eu')}>eu</Dropdown.Item>
                 <Dropdown.Item onClick={() => handleRegionChange('ap')}>ap</Dropdown.Item>
@@ -30,8 +30,9 @@ const LeaderboardToolbar = (props) => {
                             value={inputQuery} 
                             onChange={e => setInputQuery(e.target.value)}
                             className={classes.searchInput}
+                            variant='plaintext'
             />
-            <DropdownButton id="page-size-dropdown" title={`${inputPerPage} per page`}>
+            <DropdownButton id="page-size-dropdown" title={`Visible Players: ${inputPerPage}`} variant='light'>
                 <Dropdown.Item onClick={() => setInputPerPage(10)}>10</Dropdown.Item>
                 <Dropdown.Item onClick={() => setInputPerPage(25)}>25</Dropdown.Item>
                 <Dropdown.Item onClick={() => setInputPerPage(50)}>50</Dropdown.Item>
@@ -44,17 +45,19 @@ const LeaderboardToolbar = (props) => {
 const Leaderboard = (props) => {
     const { players, loading, error, inputPerPage, inputQuery, page } = props
 
+    // calculate the current players to display based on the page and the number of players per page
     const indexOfLastPlayer = page * inputPerPage
     const indexOfFirstPlayer = indexOfLastPlayer - inputPerPage
     const currentPlayers = players.slice(indexOfFirstPlayer, indexOfLastPlayer)
 
-    const allQueriedPlayers = players.filter(player => player.gameName.toLowerCase().includes(inputQuery.toLowerCase())) // all players that match the query
-    const currentQueriedPlayers = allQueriedPlayers.slice(indexOfFirstPlayer, indexOfLastPlayer) // players that match the query and are on the current page
+    // calculate the current queried players to display based on the page and the number of players per page
+    const allQueriedPlayers = players.filter(player => player.gameName.toLowerCase().includes(inputQuery.toLowerCase()))
+    const currentQueriedPlayers = allQueriedPlayers.slice(indexOfFirstPlayer, indexOfLastPlayer)
 
     if (loading) {
         return (
             <div className='d-flex justify-content-center mt-5'>
-                <Spinner animation='border' />
+                <Spinner animation='border' variant='light' role='status' />
             </div>
         )
     }
@@ -100,6 +103,13 @@ const Leaderboard = (props) => {
                     </ListGroup.Item>
                 ))
             )}
+            {inputQuery !== '' & currentQueriedPlayers.length === 0 ? ( // if there is a query and no players match it, show a message
+                <ListGroup.Item className={classes.leaderboardPlayerRow}>
+                    <div>
+                        <p>No players found</p>
+                    </div>
+                </ListGroup.Item>
+            ) : ( <></> )}
         </ListGroup>
     )
 }
