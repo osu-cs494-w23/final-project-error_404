@@ -1,10 +1,11 @@
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const AccountInfoPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
+
+  console.log(session)
 
   if (status === "loading") {
     return <p>Loading ...</p>;

@@ -5,14 +5,14 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import { SessionProvider } from "next-auth/react";
 
-export default function App({session, Component, pageProps }) {
+export default function App({ session, Component, pageProps }) {
   return (
-    <SessionProvider session={session}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <SessionProvider session={session}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </Provider>
-    </SessionProvider>
+      </SessionProvider>
+    </Provider>
   );
 }

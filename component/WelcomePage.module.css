@@ -4,11 +4,12 @@
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
+    gap:10px;
     
 
 }
 
-.center div{
+.center{
     margin-top: 25%;
     color: white;
     
@@ -21,4 +22,29 @@
 
 .subtitle{
     font-size: 90px;
+}
+
+.search_group{
+    display: inline-block;
+    
+}
+
+.search_group input {
+    background-color: transparent !important;
+    color: white;
+    max-width: 450px;
+    min-width: 350px;
+    height: 60px;
+    font-size: x-large;
+    border-radius: 0px;
+    border: none;
+    border-bottom: solid 1px white !important;
+    margin-top: 10px;
+}
+
+.dropdown{
+    border-radius: 0px;
+    max-width: 450px;
+    min-width: 350px;
+
 }

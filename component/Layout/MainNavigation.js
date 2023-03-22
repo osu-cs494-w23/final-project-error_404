@@ -14,7 +14,6 @@ import { useRouter } from "next/router";
 const HomePage = () => {
   const { data: session, status } = useSession();
 
-  console.log(status)
   const router = useRouter();
 
   const isAuthIn = useSelector((state) => state.auth.isLoggedIn);

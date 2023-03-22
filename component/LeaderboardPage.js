@@ -37,7 +37,7 @@ const LeaderboardToolbar = (props) => {
                     <Dropdown.Item onClick={() => onPerPageChange(100)}>100</Dropdown.Item>
                 </DropdownButton>
             </ButtonToolbar>
-               
+            
     )
 }
 
