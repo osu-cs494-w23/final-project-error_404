@@ -19,3 +19,10 @@ a {
 input::placeholder{
     color: white !important;
 }
+
+
+body{
+  background-image: url("black_background.jpg");
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
