@@ -11,7 +11,18 @@
 }
 
 .searchInput {
+    background-color: #3b3b3b;
+    border: none;
     width: 20rem;
+    color: white;
+}
+
+.searchInput:focus {
+    background-color: #3b3b3b;
+    border: none;
+    width: 20rem;
+    outline: 2px solid white;
+    color: white;
 }
 
 .leaderboardTitleRow {
