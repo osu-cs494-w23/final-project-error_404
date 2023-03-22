@@ -6,15 +6,33 @@ import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { modalAction } from "@/store/modal";
 import { PersonFill } from "react-bootstrap-icons";
-import classes  from "./MainNavigation.module.css";
+import classes from "./MainNavigation.module.css";
+
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const HomePage = () => {
+  const { data: session, status } = useSession();
+
+  console.log(status)
+  const router = useRouter();
+
   const isAuthIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
   const openModal = () => {
     dispatch(modalAction.changeModalState());
   };
+  
+
+  const logOutHandler = async ()  => {
+
+    const data = await signOut({ redirect: false, callbackUrl: `/` })
+    router.push(data.url)
+
+
+  }
+
 
   return (
     <div className={classes.navbar}>
@@ -47,12 +65,22 @@ const HomePage = () => {
                 Signed in as: <a href="/login">Mark Otto</a>
               </Navbar.Text>
             )}
-            <Nav className="d-flex gap-2">
-              <Nav.Item>
-                {!isAuthIn && (
+            <Nav >
+              <Nav.Item className="d-flex gap-3">
+                {!session && (
                   <Button variant="outline-light" onClick={openModal}>
                     Account <PersonFill size={20} />{" "}
                   </Button>
+                )}
+
+                {session && (
+                  <Button variant="outline-light" as={Link} href="/account">
+                    Profile
+                  </Button>
+                )}
+
+                {session && (
+                  <Button variant="outline-light" onClick={logOutHandler}>Logout</Button>
                 )}
               </Nav.Item>
             </Nav>
