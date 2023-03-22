@@ -8,17 +8,19 @@ import classes from "./AuthModal.module.css";
 import { signIn } from "next-auth/react"
 
 
-async function createUser(username, email, password) {
+
+async function createUser(username, email, password, tagline, gamename) {
+  console.log("Here - createuser")
   const res = await fetch("api/auth/signup", {
     method: "POST",
-    body: JSON.stringify({ username, email, password }),
+    body: JSON.stringify({ username, email, password, tagline, gamename }),
     headers: {
       "Content-Type": "application/json",
     },
   });
 
   const data = await res.json();
-
+  console.log(res)
   if (!res.ok) {
     throw new Error(data.message || "Something went wrong!");
   }
@@ -33,6 +35,9 @@ const AuthModal = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const usernameInputRef = useRef();
+
+  const taglineInputRef = useRef();
+  const gamenameInputRef = useRef();
 
   const authStateHandler = () => {
     setSignIn((prevState) => !prevState);
@@ -53,8 +58,11 @@ const AuthModal = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
+    const enteredTagline = taglineInputRef.current.value;
+    const enteredGamename = gamenameInputRef.current.value;
+
     try {
-      await createUser(enteredUsername, enteredEmail, enteredPassword);
+      await createUser(enteredUsername, enteredEmail, enteredPassword, enteredTagline, enteredGamename);
     } catch (e) {
       console.log(e);
       
@@ -108,6 +116,33 @@ const AuthModal = () => {
                 />
               </Form.Group>
             )}
+             {!isSignIn && (
+              <Form.Group className="mb-3" controlId="formBasicGamename">
+                <Form.Label>GameName</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Gamename"
+                  ref={gamenameInputRef}
+                  required
+                />
+                
+              </Form.Group>
+            )}
+            {!isSignIn && (
+              <Form.Group className="mb-3" controlId="formBasicTagline">
+                <Form.Label>Tagline</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Tagline"
+                  ref={taglineInputRef}
+                  required
+                />
+                <Form.Text className="text-muted">
+                eg. 1234 - no '#' needed
+              </Form.Text>
+              </Form.Group>
+            )}
+           
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
