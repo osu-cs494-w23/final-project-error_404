@@ -8,8 +8,8 @@ async function handler(req, res) {
 
   const data = req.body;
 
-  const { username, email, password } = data;
-
+  const { username, email, password, tagline, gamename } = data;
+  console.log(data)
 
   console.log(username);
   if (
@@ -17,6 +17,8 @@ async function handler(req, res) {
     !email ||
     !email.includes("@") ||
     !password ||
+    !tagline ||
+    !gamename ||
     password.trim().length < 7
   ) {
     res.status(422).json({
@@ -46,6 +48,8 @@ async function handler(req, res) {
       name: username,
       email: email,
       password: hashedPassword,
+      tagline: tagline,
+      gamename: gamename
     })
 
   client.close();

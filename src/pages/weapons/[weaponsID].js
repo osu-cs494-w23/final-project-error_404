@@ -2,6 +2,7 @@
 import Container from 'react-bootstrap/Container';
 import Image  from 'react-bootstrap/Image';
 import Spinner from 'react-bootstrap/Spinner';
+import Carousel from 'react-bootstrap/Carousel';
 //Hook and css
 import useWeapons from "../../../component/Hooks/useWeapons";
 import classes from "./Weapon.module.css";
@@ -33,8 +34,8 @@ export default function Weapon(){
         currentSkins = currentWeapon.skins
         for(var i = 0; i < currentSkins.length; i++){
             //these are conditions for removal
-            if(currentSkins[i].displayIcon == null || currentSkins[i].displayName == "Random Favorite Skin"){
-                console.log("Removed")
+            if(currentSkins[i].displayIcon == null || currentSkins[i].displayName == "Random Favorite Skin" || currentSkins[i].displayName == `Standard ${currentWeapon.displayName}`){
+                //console.log("Removed")
                 currentSkins.splice(i, 1)
             }
         }
@@ -44,14 +45,13 @@ export default function Weapon(){
         if(index != currentSkins.length-1){
             setIndex(index +1);
         }
-        console.log("New index:", index)
+        //console.log("New index:", index)
     };
     const decrementIndex = () => {
         if(index != 0){
             setIndex(index - 1);
         }
-        
-        console.log("New index:", index)
+        //console.log("New index:", index)
     };
 
     //console.log("router.query:", router.query)
@@ -61,17 +61,48 @@ export default function Weapon(){
     // Special case: if currentWeapon's displayName is Knife, 
     //then it will have a different page since many fields such as shop data will be null. 
     if(currentWeapon != null && currentWeapon.displayName === "Melee"){
+        console.log(currentWeapon)
+        const meleeSkins = currentWeapon.skins
+        {meleeSkins.map(i => {
+            console.log(i)
+            console.log(i.displayIcon)
+        })}
         return(
             <Container className={classes.container}>
                 <div className={classes.weaponDiv}>
                     <h1 > {currentWeapon.displayName}</h1>
                     <Image src={currentWeapon.displayIcon} className={classes.weaponImage}></Image>
+
+                    <div className="skinsDiv">
+                    <h2>Skins</h2>
+                    {/* <Carousel>
+                        {meleeSkins.map(i => {
+                            return(
+                            <>
+                            <Carousel.Item>
+                                <img src={i.displayIcon}></img>
+                            </Carousel.Item>
+                            </>
+                            )
+                            
+                        })}
+                    </Carousel> */}
+
+                    <ul className={classes.listItems}>
+                    <li>{currentWeapon.skins[index].displayName}<Image src={currentWeapon.skins[index].displayIcon} className={classes.skinImage}></Image> </li>
+                        <li>{index + 1}/{currentSkins.length}</li>
+                        <button onClick={decrementIndex} className={classes.arrowButton}>&#10094;</button>
+                        <button onClick={incrementIndex} className={classes.arrowButton}>&#10095;</button>
+                    </ul>
+                    </div>
+                    
                 </div>
             </Container>
         )
     }
     return currentWeapon ? (
         <Container className={classes.container}>
+
             <div className={classes.weaponDiv}>
                 <h1> {currentWeapon.displayName}</h1>
                 <Image src={currentWeapon.displayIcon} className={classes.weaponImage}></Image>
@@ -107,22 +138,19 @@ export default function Weapon(){
 
             <div className="skinsDiv">
                 <h2>Skins</h2>
-                <ul className={classes.listItems}>
-                    <li>{currentWeapon.skins[index].displayName}<Image src={currentWeapon.skins[index].displayIcon} className={classes.skinImage}></Image> </li>
-                    <li>{index + 1}/{currentSkins.length}</li>
-                    <button onClick={decrementIndex} className={classes.arrowButton}>&#10094;</button>
+                <div className={classes.skinItems}>
+                    <button onClick={decrementIndex} className={classes.arrowButton}>&#10094;</button> 
+                    <div className='d-flex flex-column gap-10 justify-content-center text-center m-4'>
+                        {index + 1}/{currentSkins.length}
+                        <div className={classes.skinImageDiv}>
+                            <Image src={currentWeapon.skins[index].displayIcon} className={classes.skinImage}>
+                            </Image>
+                        </div>
+                        
+                        {currentWeapon.skins[index].displayName} 
+                    </div>
                     <button onClick={incrementIndex} className={classes.arrowButton}>&#10095;</button>
-                    {/* {currentWeapon.skins.map((skin) => (
-                        (skin.displayIcon && skin.displayName != "Random Favorite Skin") && (
-                        <>
-                            <li>{skin.displayName}<Image src={skin.displayIcon} className={classes.weaponImage}></Image> </li>
-                            <button >Prev</button>
-                            <button >Next</button>
-                        </>
-                        ) 
-                    ))} */}
-                    
-                </ul>
+                </div>
             </div>
         </Container>
         

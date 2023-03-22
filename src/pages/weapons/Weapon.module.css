@@ -1,11 +1,12 @@
 .container {
     color: #e8e6e3;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
-
 .weaponDiv{
-    width:800px; /* hard coded width for now */
+    /* width:800px; hard coded width for now */
 }
 
 /* .infoDiv {
@@ -14,7 +15,14 @@
 .infoDiv > div {
     flex: 1; 
 } */
-
+.skinItems{
+    color: rgba(251,109,95);
+    list-style-type: none;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .listItems{
     color: rgba(251,109,95);
     list-style-type: none;
@@ -28,24 +36,29 @@
     margin-right: auto;
 
 }
-
 /* Skins Div*/
 .skinImage{
-    width: max-content;
-    max-width: 500px;
+    max-width: 350px;
+   
     height: 100px;
     display: block;
+    
+
+}
+.skinImageDiv{
+    padding: 1rem;
     margin-left: auto;
     margin-right: auto;
 
+    width: fit-content;
 }
+
 .arrowButton{
+    height: 25%;
     cursor: pointer;
     color: #222428;
     font-weight: bold;
     font-size: 30px;
     transition: .6s ease;
     border-radius: 0 4px 4px 0
-    /* move to the center */
-    
 }
