@@ -104,10 +104,14 @@ const Leaderboard = (props) => {
                 currentPlayers.map((player, index) => (
                     <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
                         <div>
-                            <p>{player.leaderboardRank} - {player.gameName}</p>
+                            <p className={classes.leaderboardParagraph}>
+                                {player.leaderboardRank} - {player.gameName}
+                            </p>
                         </div>
                         <div>
-                            <p>{player.rankedRating}</p>
+                            <p className={classes.leaderboardParagraph}>
+                                {player.rankedRating}
+                            </p>
                         </div>
                     </ListGroup.Item>
                 ))
@@ -115,10 +119,14 @@ const Leaderboard = (props) => {
                 currentQueriedPlayers.map((player, index) => (
                     <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
                         <div>
-                            <p>{player.leaderboardRank} - {player.gameName}</p>
+                            <p className={classes.leaderboardParagraph}>
+                                {player.leaderboardRank} - {player.gameName}
+                            </p>
                         </div>
                         <div>
-                            <p>{player.rankedRating}</p>
+                            <p className={classes.leaderboardParagraph}>
+                                {player.rankedRating}
+                            </p>
                         </div>
                     </ListGroup.Item>
                 ))

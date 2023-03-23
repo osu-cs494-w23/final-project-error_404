@@ -35,21 +35,41 @@
     font-size: 1.5rem;
 }
 
+.leaderboardPagination > a {
+    background-color: #3b3b3b;
+}
+
 .leaderboard {
     margin-bottom: 1rem;
+}
+
+.leaderboard > * {
+    outline: 3px solid black;
 }
 
 .leaderboardTitleRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    font-weight: 500;
     font-size: 1.5rem;
+
+    background-color: #3b3b3b;
+    color: white;
 }
 
 .leaderboardPlayerRow {
     display: flex;
     justify-content: space-between;
     font-size: 1.25rem;
+
+    background-color: #3b3b3b;
+    color: white;
+}
+
+.leaderboardParagraph {
+    margin: 0.25rem;
 }
 
 @media (max-width: 1024px) {
