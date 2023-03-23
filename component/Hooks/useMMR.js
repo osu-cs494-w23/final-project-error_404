@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react'
 
-function getAccount(username,tagline){
+function useMMR(username,tagline){
     const [ info, setInfo ] = useState("")//store json
     const [ loading, setLoading ] = useState(false)
     const [ error, setError ] = useState(false)
@@ -9,12 +9,12 @@ function getAccount(username,tagline){
         let ignore = false
         const controller = new AbortController()
 
-        async function fetchAccount(){
+        async function fetchMMR(){
             setLoading(true)
             let responseBody = {}
             try{
                 const response = await fetch(
-                    `https://api.henrikdev.xyz/valorant/v1/account/${username}/${tagline}`,
+                    `https://api.henrikdev.xyz/valorant/v1/mmr/na/${username}/${tagline}`,
                     {signal: controller.signal }
                     )
                 if(response.status !== 200){
@@ -44,16 +44,16 @@ function getAccount(username,tagline){
             }
 
         }
-        fetchAccount()
-        console.log("Fetched Account")
+        fetchMMR()
+        console.log("Fetched MMR")
 
         return () => {
             ignore = true 
             controller.abort()
         }
-    }, []) 
+    }, [username,tagline ]) 
     return [info, loading, error]
     
 }
 
-export default getAccount
+export default useMMR

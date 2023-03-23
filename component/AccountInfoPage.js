@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import useDB from "./Hooks/useDB";
 import { Container, Image } from "react-bootstrap";
 import classes from "./AccountInfoPage.module.css";
-import getAccount from "./Hooks/getAccount";
-import getMMR from "./Hooks/getMMR";
+import getAccount from "./Hooks/useAccount";
+import getMMR from "./Hooks/useMMR";
 
 const AccountInfoPage = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ const AccountInfoPage = () => {
   let email = ""
 
   if(session && status === "authenticated"){
-    // setEmail( session.user.email)
+    //  setEmail( session.user.email)
     email = session.user.email
     
   }
