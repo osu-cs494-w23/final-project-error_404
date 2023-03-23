@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ButtonToolbar, Spinner, DropdownButton, Dropdown, FormControl, Container, ListGroup, Pagination, Col, Row, Tab } from 'react-bootstrap'
+import { ButtonToolbar, Spinner, DropdownButton, Dropdown, FormControl, Container, ListGroup, Pagination } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import classes from './LeaderboardPage.module.css'
 
@@ -10,8 +10,12 @@ const LeaderboardToolbar = (props) => {
 
     const router = useRouter()
 
-    console.log(props)
+    // if the region is changed in the url, update the input region
+    if (router.query.region !== undefined) {
+        setInputRegion(router.query.region)
+    }
 
+    // if the region is changed in the dropdown, update the url
     const handleRegionChange = (region) => {
         setInputRegion(region)
         router.push(`/leaderboard/${region}`)
@@ -40,7 +44,7 @@ const LeaderboardToolbar = (props) => {
                     <Pagination.Next onClick={() => handlePageChange(page + 1)} />
                 </Pagination>
             </div>
-            <FormControl    placeholder='Search Player' 
+            <FormControl    placeholder='Search for a Player' 
                             type='text' 
                             value={inputQuery} 
                             onChange={e => setInputQuery(e.target.value)}
@@ -53,8 +57,6 @@ const LeaderboardToolbar = (props) => {
 
 const Leaderboard = (props) => {
     const { players, loading, error, inputPerPage, inputQuery, page } = props
-
-    const [activePlayer, setActivePlayer] = useState('1')
 
     // calculate the current players to display based on the page and the number of players per page
     const indexOfLastPlayer = page * inputPerPage
@@ -82,7 +84,7 @@ const Leaderboard = (props) => {
     }
 
     return (
-        <ListGroup>
+        <ListGroup className={classes.leaderboard}>
             <ListGroup.Item className={classes.leaderboardTitleRow}>
                 <div>
                     <strong>Rank - Username</strong>
