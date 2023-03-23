@@ -15,6 +15,12 @@ const LeaderboardToolbar = (props) => {
         setInputRegion(router.query.region)
     }
 
+    // if the region is not valid, default to na and update the url
+    if (inputRegion != 'na' && inputRegion != 'eu' && inputRegion != 'ap' && inputRegion != 'kr') {
+        setInputRegion('na')
+        router.push(`/leaderboard/na`)
+    }
+
     // if the region is changed in the dropdown, update the url
     const handleRegionChange = (region) => {
         setInputRegion(region)
