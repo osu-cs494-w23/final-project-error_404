@@ -6,7 +6,7 @@ import classes from './LeaderboardPage.module.css'
 import useLeaderboard from './Hooks/useLeaderboard'
 
 const LeaderboardToolbar = (props) => {
-    const { inputRegion, setInputRegion, inputPerPage, setInputPerPage, inputQuery, setInputQuery, page, handlePageChange } = props
+    const { inputRegion, setInputRegion, inputPerPage, setInputPerPage, inputQuery, setInputQuery, page, setPage, handlePageChange } = props
 
     const router = useRouter()
 
@@ -23,6 +23,7 @@ const LeaderboardToolbar = (props) => {
 
     // if the region is changed in the dropdown, update the url
     const handleRegionChange = (region) => {
+        setPage(1)
         setInputRegion(region)
         router.push(`/leaderboard/${region}`)
     }
@@ -162,6 +163,7 @@ const LeaderboardPage = ({ region }) => {
         inputQuery,
         setInputQuery,
         page,
+        setPage,
         handlePageChange
     }
 
