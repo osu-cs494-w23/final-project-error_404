@@ -93,11 +93,7 @@ const Leaderboard = (props) => {
             </ListGroup.Item>
             {inputQuery === '' ? ( // if there is no query, show the current players
                 currentPlayers.map((player, index) => (
-                    <ListGroup.Item key={index} 
-                                    active={index === activePlayer} 
-                                    className={classes.leaderboardPlayerRow}
-                                    onClick={() => setActivePlayer(index)}
-                    >
+                    <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
                         <div>
                             <p>{player.leaderboardRank} - {player.gameName}</p>
                         </div>
