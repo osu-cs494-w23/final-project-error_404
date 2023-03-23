@@ -4,9 +4,8 @@ import LeaderboardPage from '../../../component/LeaderboardPage'
 const Leaderboard = () => {
     const router = useRouter()
     const { region } = router.query
-    console.log(region)
 
-    return <LeaderboardPage region={region || 'na'} />
+    return <LeaderboardPage region={region} />
 }
 
 export default Leaderboard
