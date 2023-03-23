@@ -35,6 +35,10 @@
     font-size: 1.5rem;
 }
 
+.leaderboard {
+    margin-bottom: 1rem;
+}
+
 .leaderboardTitleRow {
     display: flex;
     justify-content: space-between;
