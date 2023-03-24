@@ -1,3 +1,32 @@
 .container{
-  color: white;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.rankCard{
+  width:18rem;
+  background-color: black;
+
+  /* padding: 2%; */
+  
+}
+.rankCard img{
+  height: 5rem;
+  width: 5rem;
+  /* margin-left: 75%; */
+
+}
+
+.playerCard{
+  padding:10px;
+}
+
+.rankDetail{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:1rem;
+
 }

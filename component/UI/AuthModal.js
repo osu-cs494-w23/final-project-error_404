@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalAction } from "@/store/modal";
 import classes from "./AuthModal.module.css";
 import { signIn } from "next-auth/react"
-
+import Alert from "react-bootstrap/Alert";
 
 
 async function createUser(username, email, password, tagline, gamename) {
@@ -31,6 +31,7 @@ const AuthModal = () => {
   const isShow = useSelector((state) => state.modal.isShow);
   const [isSignIn, setSignIn] = useState(true);
   const [isExisting, setExisting] = useState(false);
+  const [error, setError] = useState(false)
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -41,6 +42,7 @@ const AuthModal = () => {
 
   const authStateHandler = () => {
     setSignIn((prevState) => !prevState);
+    
   };
 
   const showHandler = () => {
@@ -87,11 +89,14 @@ const AuthModal = () => {
 
     const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword });
 
-
     console.log(result)
     
     if (!result.error){
       dispatch(modalAction.changeModalState())
+      setError(false)
+    }
+    else{
+      setError(true)
     }
     console.log("Clicked Sign In")
 
@@ -143,6 +148,7 @@ const AuthModal = () => {
               </Form.Group>
             )}
            
+           {error && isSignIn && <Alert key="danger" variant="danger">Incorrect credentials</Alert>}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>

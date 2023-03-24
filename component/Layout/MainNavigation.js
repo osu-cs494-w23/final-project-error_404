@@ -19,10 +19,12 @@ const HomePage = () => {
   const isAuthIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
+
   const openModal = () => {
     dispatch(modalAction.changeModalState());
   };
   
+
 
   const logOutHandler = async ()  => {
 

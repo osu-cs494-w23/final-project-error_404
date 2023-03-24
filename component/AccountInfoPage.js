@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useDB from "./Hooks/useDB";
-import { Container, Image } from "react-bootstrap";
+import { Container, Image, Card } from "react-bootstrap";
 import classes from "./AccountInfoPage.module.css";
 import getAccount from "./Hooks/useAccount";
 import getMMR from "./Hooks/useMMR";
@@ -39,32 +39,40 @@ const AccountInfoPage = () => {
   }
   
   return (
+
     <Container className={classes.container}>
-      <h1> Welcome to the Account Page</h1>
-
-      <h2>My Login Account Info</h2>
-      <h4>Username: {players.name} </h4>
-      <h4>Email: {players.email}</h4>
-      <h4>Gamename: {players.gamename}#{players.tagline}</h4>
-      {/* <h3>Gamename: {players.gamename} | Tagline: {players.tagline}</h3> */}
-
-
-      {/* Split here  */}
-      <h2>My Game Info</h2>
+      
+      <Card style={{ width: "18rem"}}>
+        <Card.Header><b>My Login Account Info</b></Card.Header>
+        <Card.Body>
+          <Card.Text><b>Username:</b> {players.name}</Card.Text>
+          <Card.Text><b>Email:</b> {players.email}</Card.Text>
+          <Card.Text><b>Gamename:</b> {players.gamename ? `${players.gamename}#${players.tagline}` : "No game info"}</Card.Text>
+        </Card.Body>
+      </Card>
+      
       {playerInfo[0].account_level && 
-        <div>
-          <h4>Account Level: {playerInfo[0].account_level}</h4>
-          <Image src={playerInfo[0].card.small}></Image>
-          {/* <h4>Card: {playerInfo[0].card.small}</h4> */}
-        </div>
+        <Card bg="light" key="light" text="dark" className={classes.playerCard}>
+          <Card.Title><b>Account Level:</b> {playerInfo[0].account_level}</Card.Title>
+          <Card.Img src={playerInfo[0].card.small}></Card.Img>
+
+        </Card>
+
       }
       {mmrInfo[0].currenttierpatched && 
-         
-        <div>
-          <h4>Rank: {mmrInfo[0].currenttierpatched} | {mmrInfo[0].elo}</h4>
-          <Image src={mmrInfo[0].images.small}></Image>
-          {/* <h4>{mmrInfo[0].images.large}</h4> */}
-        </div>
+        <Card bg="light" key="light" text="dark" className={classes.rankCard}>
+        
+          <Card.Body className={classes.rankDetail}>
+            <div>
+              <Card.Title><b>My Game Rank</b></Card.Title>
+              <Card.Text><b>Rank:</b> {mmrInfo[0].currenttierpatched} </Card.Text>
+              <Card.Text><b>MMR:</b> {mmrInfo[0].elo}</Card.Text>
+            </div>
+            <Card.Img src={mmrInfo[0].images.large}></Card.Img>
+          </Card.Body>
+          
+
+        </Card>
       }
     </Container>
   )

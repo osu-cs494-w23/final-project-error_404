@@ -104,7 +104,7 @@ const Leaderboard = (props) => {
                 currentPlayers.map((player, index) => (
                     <ListGroup.Item key={index} className={classes.leaderboardPlayerRow}>
                         <div>
-                            <p>{player.leaderboardRank} - {player.gameName}</p>
+                            <p>{player.leaderboardRank} - {player.gameName ? player.gameName : "*Private Profile*"} </p>
                         </div>
                         <div>
                             <p>{player.rankedRating}</p>
