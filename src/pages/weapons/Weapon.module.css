@@ -5,16 +5,14 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.weaponDiv{
+.listItems > li > b{
     /* width:800px; hard coded width for now */
+    color: #e8e6e3;
+    color: rgba(251,109,95);
 }
-
-/* .infoDiv {
-    display: flex;
+.infoDiv > div > h2{
+    color: rgba(251,109,95);
 }
-.infoDiv > div {
-    flex: 1; 
-} */
 .skinItems{
     color: rgba(251,109,95);
     list-style-type: none;
@@ -25,6 +23,7 @@
 }
 .listItems{
     color: rgba(251,109,95);
+    color: #e8e6e3;
     list-style-type: none;
     font-size: 20px;
 }

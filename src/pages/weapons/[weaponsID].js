@@ -111,26 +111,26 @@ export default function Weapon(){
                     <div className='shopDiv'>
                         <h2>Shop Data</h2>
                         <ul className={classes.listItems}>
-                            <li>Category: {currentWeapon.shopData.category}</li>
-                            <li>Cost: {currentWeapon.shopData.cost}</li>
+                            <li>Category: <b> {currentWeapon.shopData.category} </b></li>
+                            <li>Cost: <b>{currentWeapon.shopData.cost}</b></li>
                         </ul>
                     </div>
 
                     <div className='statsDiv'>
                         <h2>Weapon Stats</h2>
                         <ul className={classes.listItems}>
-                            <li>Fire Rate: {currentWeapon.weaponStats.fireRate}</li>
-                            <li>Magazine Size: {currentWeapon.weaponStats.magazineSize}</li>
-                            <li>Reload Time: {currentWeapon.weaponStats.reloadTimeSeconds} seconds</li>
+                            <li>Fire Rate: <b>{currentWeapon.weaponStats.fireRate}</b> </li>
+                            <li>Magazine Size: <b>{currentWeapon.weaponStats.magazineSize}</b></li>
+                            <li>Reload Time: <b>{currentWeapon.weaponStats.reloadTimeSeconds} seconds</b> </li>
                         </ul>
                     </div>
 
                     <div className='damageDiv'>
                         <h2>Damage Stats</h2>
                         <ul className={classes.listItems}>
-                            <li>Head: {currentWeapon.weaponStats.damageRanges[0].headDamage}hp</li>
-                            <li>Body: {currentWeapon.weaponStats.damageRanges[0].bodyDamage}hp</li>
-                            <li>Leg: {currentWeapon.weaponStats.damageRanges[0].legDamage.toFixed(2)} hp</li>
+                            <li>Head: <b>{currentWeapon.weaponStats.damageRanges[0].headDamage}hp </b> </li>
+                            <li>Body: <b>{currentWeapon.weaponStats.damageRanges[0].bodyDamage}hp </b></li>
+                            <li>Leg: <b>{currentWeapon.weaponStats.damageRanges[0].legDamage.toFixed(2)} hp </b></li>
                         </ul>
                     </div>
                 </Container>
